@@ -1,9 +1,17 @@
 import { useState } from "react";
+
+// Import Data
 import { UserData } from "./Data/data";
+
+// Import UI
 import Navbar from "./components/basic_ui/Navbar";
 import Sidebar from "./components/basic_ui/Sidebar";
 import Linechart from "./components/other_ui/Linechart";
 import Stat from "./components/other_ui/Stat";
+
+// Import Routing
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Task from "./pages/Task";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -38,8 +46,12 @@ function App() {
 
   return (
     <>
+    <BrowserRouter>
       <div className="flex-1 flex flex-col overflow-hidden">
         <Navbar />          
+        <Routes>
+          <Route path="/task" element={<Task />}/>
+        </Routes>
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-base-300">
           <div className="container mx-auto px-6 py-8">
             <div className="flex flex-wrap -mx-4 justify-center">
@@ -61,6 +73,7 @@ function App() {
           </div>
         </main>
       </div>
+      </BrowserRouter>
     </>
   );
 }
