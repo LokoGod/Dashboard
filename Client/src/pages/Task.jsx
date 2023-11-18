@@ -49,43 +49,75 @@ const Task = () => {
 
         {activeTab === 2 && (
           <div>
-            <div>
-              <div className="flex justify-center">
-                <div className="card w-full md:w-128 bg-neutral text-neutral-content">
-                  <div className="card-body">
-                    <h2 className="card-title">Add to List</h2>
-                    <p>Content for adding to the list goes here.</p>
-                    
-                    <select className="select select-bordered w-full max-w-xs">
-                      <option disabled selected>
-                        Category
-                      </option>
-                      <option>Personal</option>
-                      <option>Work</option>
-                      <option>University</option>
-                      <option>Other</option>
-                    </select>
-                    
-                    <div className="form-control w-full max-w-xs">
+          <form>
+            <div className="flex justify-center">
+              <div className="card w-full md:w-128 bg-neutral text-neutral-content">
+                <div className="card-body">
+                  <h2 className="card-title">Add to List</h2>
+                  <p>Content for adding to the list goes here.</p>
+        
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text">Category</span>
+                      </label>
+                      <select className="select select-bordered w-full">
+                        <option disabled selected>
+                          Select a Category
+                        </option>
+                        <option>Personal</option>
+                        <option>Work</option>
+                        <option>University</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+        
+                    <div className="form-control">
                       <label className="label">
                         <span className="label-text">Task Summary</span>
                         <span className="label-text-alt">
-                          eg: conquor the galaxy
+                          e.g., conquer the galaxy
                         </span>
                       </label>
                       <input
                         type="text"
                         placeholder="Type here"
-                        className="input input-bordered w-full max-w-xs"
+                        className="input input-bordered w-full"
                       />
-
                     </div>
-                    {/* Additional content and actions for Add to List */}
                   </div>
+        
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Task Description</span>
+                    </label>
+                    <textarea
+                      className="textarea textarea-bordered w-full"
+                      placeholder="Describe the task"
+                    ></textarea>
+                  </div>
+        
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">State of Task</span>
+                    </label>
+                    <select className="select select-bordered w-full">
+                      <option disabled selected>
+                        Select Task State
+                      </option>
+                      <option>Chill</option>
+                      <option>Urgent</option>
+                      <option>Lightyears</option>
+                    </select>
+                  </div>
+        
+                  {/* Additional content and actions for Add to List */}
                 </div>
               </div>
             </div>
-          </div>
+          </form>
+        </div>
+        
         )}
       </main>
     </div>
