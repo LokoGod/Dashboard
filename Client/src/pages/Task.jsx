@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { CSSTransition } from "react-transition-group";
-import './transition.css'
 
 const Task = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -36,11 +34,14 @@ const Task = () => {
             {/* Card 1 */}
             <div className="card bg-neutral text-neutral-content">
               <div className="card-body items-center text-center">
-                <h2 className="card-title">Cookies!</h2>
-                <p>We are using cookies for no reason.</p>
+                <h2 className="card-title">Dashboard project</h2>
+                <p>Connect with the API to finish what you started.</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Accept</button>
-                  <button className="btn btn-ghost">Deny</button>
+                  <button className="btn btn-primary">Finish</button>
+                  <button className="btn btn-ghost">Ignore</button>
+                </div>
+                <div className="card-actions justify-end mt-2">
+                <div className="badge badge-accent">Personal</div> 
                 </div>
               </div>
             </div>
@@ -56,7 +57,6 @@ const Task = () => {
               <div className="card w-full md:w-128 bg-neutral text-neutral-content">
                 <div className="card-body">
                   <h2 className="card-title">Add to List</h2>
-                  <p>Content for adding to the list goes here.</p>
         
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="form-control">
