@@ -20,7 +20,3 @@ const start = async () => {
 };
 
 start();
-
-app.get("/", (req, res) => {
-  res.send("Hello, there!");
-});
