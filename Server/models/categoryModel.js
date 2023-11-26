@@ -1,7 +1,7 @@
 import connection from "../database/DBconfig";
 
 const categoryModel = {
-    getcategory: (callback) => {
+    getCategory: (callback) => {
         connection.query("SELECT category_name FROM categories", (error, results) => {
             if (error) {
                 console.error(error);
