@@ -6,6 +6,9 @@ import "dotenv/config";
 // Instances
 const app = express();
 
+// Middlware
+app.use(bodyParser.json())
+
 const port = process.env.PORT || 9000;
 
 // Server spin-up
