@@ -79,18 +79,10 @@ const Task = () => {
                           <option disabled selected>
                             Select a Category
                           </option>
-                          <option>Personal</option>
-                          <option>Work</option>
-                          <option>University</option>
-                          <option>Other</option>
+                          {categories.map((categories) => (
+                            <option>{categories.category_name}</option>
+                          ))}
                         </select>
-                        <div>
-              {categories.map((categories) => (
-                <div key={categories.category_id}>
-                  <h3>{categories.category_name}</h3>
-                </div>
-              ))}
-            </div>
                       </div>
 
                       <div className="form-control">
