@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const apiEndpoint = "http://localhost:5000/api/v1/"
+const apiEndpoint = "http://localhost:5000/api/v1/";
 
 const Task = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [categories, setCategories] = useState([]);
+  const [states, setStates] = useState([]);
 
   const handleTabClick = (tabNumber) => {
     setActiveTab(tabNumber);
@@ -13,12 +14,18 @@ const Task = () => {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await axios.get(
-        `${apiEndpoint}categories/`
-      );
+      const response = await axios.get(`${apiEndpoint}categories/`);
       setCategories(response.data);
     };
     fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    const fetchState = async () => {
+      const response = await axios.get(`${apiEndpoint}state/`);
+      setStates(response.data);
+    };
+    fetchState();
   }, []);
 
   return (
@@ -119,12 +126,14 @@ const Task = () => {
                         <span className="label-text">State of Task</span>
                       </label>
                       <select className="select select-bordered w-full">
-                        <option disabled selected>
+                        <option value="" disabled selected>
                           Select Task State
                         </option>
-                        <option>Chill</option>
-                        <option>Urgent</option>
-                        <option>Lightyears</option>
+                        {states.map((state) => (
+                          <option key={state.state_id}>
+                            {state.state_name}
+                          </option>
+                        ))}
                       </select>
                     </div>
 
