@@ -79,8 +79,8 @@ const Task = () => {
                           <option disabled selected>
                             Select a Category
                           </option>
-                          {categories.map((categories) => (
-                            <option>{categories.category_name}</option>
+                          {categories.map((category) => (
+                            <option>{category.category_name}</option>
                           ))}
                         </select>
                       </div>
