@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import axios from "axios";
 
 const Task = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [categories, setCategories] = useState([]);
-  const [error, setError] = useState()
 
   const handleTabClick = (tabNumber) => {
     setActiveTab(tabNumber);
   };
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/categories/').then((response) => {
-      setCategories(response.data)
-    })
-  }, [])
+    const fetchCategories = async () => {
+      const response = await axios.get(
+        "http://localhost:5000/api/v1/categories/"
+      );
+      setCategories(response.data);
+    };
+    fetchCategories();
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -50,7 +53,7 @@ const Task = () => {
                   <button className="btn btn-ghost">Ignore</button>
                 </div>
                 <div className="card-actions justify-end mt-2">
-                <div className="badge badge-accent">Personal</div> 
+                  <div className="badge badge-accent">Personal</div>
                 </div>
               </div>
             </div>
@@ -61,74 +64,80 @@ const Task = () => {
 
         {activeTab === 2 && (
           <div>
-          <form>
-            <div className="flex justify-center">
-              <div className="card w-full md:w-128 bg-neutral text-neutral-content">
-                <div className="card-body">
-                  <h2 className="card-title">Add to List</h2>
-        
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form>
+              <div className="flex justify-center">
+                <div className="card w-full md:w-128 bg-neutral text-neutral-content">
+                  <div className="card-body">
+                    <h2 className="card-title">Add to List</h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text">Category</span>
+                        </label>
+                        <select className="select select-bordered w-full">
+                          <option disabled selected>
+                            Select a Category
+                          </option>
+                          <option>Personal</option>
+                          <option>Work</option>
+                          <option>University</option>
+                          <option>Other</option>
+                        </select>
+                        <div>
+              {categories.map((categories) => (
+                <div key={categories.category_id}>
+                  <h3>{categories.category_name}</h3>
+                </div>
+              ))}
+            </div>
+                      </div>
+
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text">Task Summary</span>
+                          <span className="label-text-alt">
+                            e.g., conquer the galaxy
+                          </span>
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Type here"
+                          className="input input-bordered w-full"
+                        />
+                      </div>
+                    </div>
+
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text">Category</span>
+                        <span className="label-text">Task Description</span>
+                      </label>
+                      <textarea
+                        className="textarea textarea-bordered w-full"
+                        placeholder="Describe the task"
+                      ></textarea>
+                    </div>
+
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text">State of Task</span>
                       </label>
                       <select className="select select-bordered w-full">
                         <option disabled selected>
-                          Select a Category
+                          Select Task State
                         </option>
-                        <option>Personal</option>
-                        <option>Work</option>
-                        <option>University</option>
-                        <option>Other</option>
+                        <option>Chill</option>
+                        <option>Urgent</option>
+                        <option>Lightyears</option>
                       </select>
                     </div>
-        
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text">Task Summary</span>
-                        <span className="label-text-alt">
-                          e.g., conquer the galaxy
-                        </span>
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Type here"
-                        className="input input-bordered w-full"
-                      />
-                    </div>
+
+                    {/* Additional content and actions for Add to List */}
                   </div>
-        
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Task Description</span>
-                    </label>
-                    <textarea
-                      className="textarea textarea-bordered w-full"
-                      placeholder="Describe the task"
-                    ></textarea>
-                  </div>
-        
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">State of Task</span>
-                    </label>
-                    <select className="select select-bordered w-full">
-                      <option disabled selected>
-                        Select Task State
-                      </option>
-                      <option>Chill</option>
-                      <option>Urgent</option>
-                      <option>Lightyears</option>
-                    </select>
-                  </div>
-        
-                  {/* Additional content and actions for Add to List */}
                 </div>
               </div>
-            </div>
-          </form>
-        </div>
-        
+            </form>
+          </div>
         )}
       </main>
     </div>
