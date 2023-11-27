@@ -11,7 +11,7 @@ const taskModel = {
       }
     });
   },
-  c
+  
 };
 
 export default taskModel;
