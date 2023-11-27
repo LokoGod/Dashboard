@@ -6,6 +6,7 @@ import "dotenv/config";
 // Importing custom routes
 import categoryRouter from "./routes/categoryRoute.js";
 import stateRouter from "./routes/stateRoute.js";
+import taskRouter from "./routes/taskRoute.js";
 
 // Instances
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors());
 // API Routing
 app.use("/api/v1/categories", categoryRouter)
 app.use("/api/v1/state", stateRouter)
+app.use("/api/v1/task", taskRouter)
 
 const port = process.env.PORT || 9000;
 
