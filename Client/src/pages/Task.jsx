@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const apiEndpoint = "http://localhost:5000/api/v1/"
+
 const Task = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [categories, setCategories] = useState([]);
@@ -12,7 +14,7 @@ const Task = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await axios.get(
-        "http://localhost:5000/api/v1/categories/"
+        `${apiEndpoint}categories/`
       );
       setCategories(response.data);
     };
