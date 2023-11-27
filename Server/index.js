@@ -4,13 +4,16 @@ import bodyParser from "body-parser";
 import "dotenv/config";
 
 // Importing custom routes
-import router from "./routes/categoryRoute";
+import categoryRouter from "./routes/categoryRoute.js";
 
 // Instances
 const app = express();
 
 // Middlware
 app.use(bodyParser.json())
+
+// API Routing
+app.use("/api/v1/categories", categoryRouter)
 
 const port = process.env.PORT || 9000;
 
