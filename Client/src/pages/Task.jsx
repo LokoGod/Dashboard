@@ -91,7 +91,7 @@ const Task = () => {
                         <label className="label">
                           <span className="label-text">Task Summary</span>
                           <span className="label-text-alt">
-                            e.g., conquer the galaxy
+                            e.g. conquer the galaxy
                           </span>
                         </label>
                         <input
