@@ -12,7 +12,7 @@ const taskModel = {
     });
   },
   createTask: (callback) => {
-    connection.query("INSERT INTO task_list ('?', '?', '?', '?', '?')", (error, results) => {
+    connection.query("INSERT INTO task_list VALUES ('?', '?', '?', '?', '?')", (error, results) => {
       if (error) {
         console.error(error);
         callback(error, null);
