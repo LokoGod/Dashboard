@@ -1,11 +1,19 @@
 import React, { useState } from "react";
+import axios from 'axios'
 
 const Task = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const [categories, setCategories] = useState("");
 
   const handleTabClick = (tabNumber) => {
     setActiveTab(tabNumber);
   };
+
+  React.useEffect(() => {
+    axios.get('http://localhost:5000/api/v1/categories/').then((response) => {
+      setCategories(response.data)
+    })
+  }, [])
 
   return (
     <div className="min-h-screen">

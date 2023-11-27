@@ -11,6 +11,7 @@ const app = express();
 
 // Middlware
 app.use(bodyParser.json())
+app.use(cors());
 
 // API Routing
 app.use("/api/v1/categories", categoryRouter)
