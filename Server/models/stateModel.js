@@ -1,8 +1,8 @@
 import connection from "../database/DBconfig";
 
-const taskModel = {
-  getTask: (callback) => {
-    connection.query("SELECT * FROM task_list", (error, results) => {
+const stateModel = {
+  getState: (callback) => {
+    connection.query("SELECT * FROM states", (error, results) => {
       if (error) {
         console.error(error);
         callback(error, null);
@@ -13,4 +13,4 @@ const taskModel = {
   },
 };
 
-export default taskModel;
+export default stateModel;
