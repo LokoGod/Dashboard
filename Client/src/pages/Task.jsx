@@ -76,11 +76,13 @@ const Task = () => {
                           <span className="label-text">Category</span>
                         </label>
                         <select className="select select-bordered w-full">
-                          <option disabled selected>
+                          <option value="" disabled selected>
                             Select a Category
                           </option>
                           {categories.map((category) => (
-                            <option>{category.category_name}</option>
+                            <option key={category.category_id}>
+                              {category.category_name}
+                            </option>
                           ))}
                         </select>
                       </div>
