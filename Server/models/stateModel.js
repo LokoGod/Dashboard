@@ -1,4 +1,4 @@
-import connection from "../database/DBconfig";
+import connection from "../database/DBconfig.js";
 
 const stateModel = {
   getState: (callback) => {

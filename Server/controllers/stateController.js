@@ -1,4 +1,4 @@
-import stateModel from "../models/stateModel";
+import stateModel from "../models/stateModel.js";
 
 const stateController = {
   getState: (req, res) => {
