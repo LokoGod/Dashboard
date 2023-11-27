@@ -11,15 +11,21 @@ const taskModel = {
       }
     });
   },
-  createTask: (callback) => {
-    connection.query("INSERT INTO task_list VALUES ('?', '?', '?', '?', '?')", (error, results) => {
-      if (error) {
-        console.error(error);
-        callback(error, null);
-      } else {
-        callback(null, results);
+  createTask: (taskData, callback) => {
+    const { category_id, state_id, summary, description } = taskData;
+
+    connection.query(
+      "INSERT INTO task_list (category_id, state_id, summary, description) VALUES (?, ?, ?, ?)",
+      [category_id, state_id, summary, description],
+      (error, results) => {
+        if (error) {
+          console.error(error);
+          callback(error, null);
+        } else {
+          callback(null, results);
+        }
       }
-    });
+    );
   },
 };
 
