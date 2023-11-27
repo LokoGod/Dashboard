@@ -3,6 +3,9 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import "dotenv/config";
 
+// Importing custom routes
+import router from "./routes/categoryRoute";
+
 // Instances
 const app = express();
 
