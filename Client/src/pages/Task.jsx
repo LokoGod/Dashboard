@@ -7,6 +7,28 @@ const Task = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [categories, setCategories] = useState([]);
   const [states, setStates] = useState([]);
+  const [data, setData] = useState({
+    category_id: '',
+    state_id: '',
+    summary: '',
+    description: '',
+  })
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post(`${apiEndpoint}`,data);
+      console.log("POST request successful:", response);
+    } catch (error) {
+      console.error('POST request failed', error);
+    }
+  }
+
+  const handleChange = (event) => {
+    const { category_id, state_id, summary, description } = event.target;
+    setData((prevState) =>  ({...prevState, [category_id]: value, [state_id]: value, [summary]: value, [description]: value}));
+  }
 
   const handleTabClick = (tabNumber) => {
     setActiveTab(tabNumber);
@@ -84,12 +106,12 @@ const Task = () => {
                         <label className="label">
                           <span className="label-text">Category</span>
                         </label>
-                        <select className="select select-bordered w-full">
+                        <select className="select select-bordered w-full" name="category_id">
                           <option value="" disabled selected>
                             Select a Category
                           </option>
                           {categories.map((category) => (
-                            <option key={category.category_id}>
+                            <option value={data.category_id} key={category.category_id}>
                               {category.category_name}
                             </option>
                           ))}
@@ -106,6 +128,8 @@ const Task = () => {
                         <input
                           type="text"
                           placeholder="Type here"
+                          name="summary"
+                          value={data.summary}
                           className="input input-bordered w-full"
                         />
                       </div>
@@ -118,6 +142,8 @@ const Task = () => {
                       <textarea
                         className="textarea textarea-bordered w-full"
                         placeholder="Describe the task"
+                        name="description"
+                        value={data.description}
                       ></textarea>
                     </div>
 
@@ -125,12 +151,12 @@ const Task = () => {
                       <label className="label">
                         <span className="label-text">State of Task</span>
                       </label>
-                      <select className="select select-bordered w-full">
+                      <select className="select select-bordered w-full"  name="state_id">
                         <option value="" disabled selected>
                           Select Task State
                         </option>
                         {states.map((state) => (
-                          <option key={state.state_id}>
+                          <option key={state.state_id} value={data.state_id}>
                             {state.state_name}
                           </option>
                         ))}
