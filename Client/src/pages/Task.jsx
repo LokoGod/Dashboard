@@ -109,7 +109,7 @@ const Task = () => {
                         <select
                           className="select select-bordered w-full"
                           name="category_id"
-                          value={formData.category_id}
+                          value={formData.category_name}
                           onChange={handleInputChange}
                         >
                           <option value="" disabled selected>
@@ -118,6 +118,7 @@ const Task = () => {
                           {categories.map((category) => (
                             <option
                               key={category.category_id}
+                              value={category.category_id}
                             >
                               {category.category_name}
                             </option>
@@ -170,7 +171,7 @@ const Task = () => {
                           Select Task State
                         </option>
                         {states.map((state) => (
-                          <option key={state.state_id}>
+                          <option key={state.state_id} value={state.state_id}>
                             {state.state_name}
                           </option>
                         ))}
