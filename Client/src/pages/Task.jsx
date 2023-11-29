@@ -18,7 +18,7 @@ const Task = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${apiEndpoint}`, formData);
+      const response = await axios.post(`${apiEndpoint}task`, formData);
       console.log("POST request successful:", response);
     } catch (error) {
       console.error("POST request failed", error);
