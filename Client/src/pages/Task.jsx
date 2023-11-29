@@ -7,28 +7,28 @@ const Task = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [categories, setCategories] = useState([]);
   const [states, setStates] = useState([]);
-  const [data, setData] = useState({
-    category_id: '',
-    state_id: '',
-    summary: '',
-    description: '',
-  })
+  const [formData, setFormData] = useState({
+    category_id: "",
+    state_id: "",
+    summary: "",
+    description: "",
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${apiEndpoint}`,data);
+      const response = await axios.post(`${apiEndpoint}`, formData);
       console.log("POST request successful:", response);
     } catch (error) {
-      console.error('POST request failed', error);
+      console.error("POST request failed", error);
     }
-  }
+  };
 
-  const handleChange = (event) => {
-    const { category_id, state_id, summary, description } = event.target;
-    setData((prevState) =>  ({...prevState, [category_id]: value, [state_id]: value, [summary]: value, [description]: value}));
-  }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
 
   const handleTabClick = (tabNumber) => {
     setActiveTab(tabNumber);
@@ -95,7 +95,7 @@ const Task = () => {
 
         {activeTab === 2 && (
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="flex justify-center">
                 <div className="card w-full md:w-128 bg-neutral text-neutral-content">
                   <div className="card-body">
@@ -106,12 +106,19 @@ const Task = () => {
                         <label className="label">
                           <span className="label-text">Category</span>
                         </label>
-                        <select className="select select-bordered w-full" name="category_id">
+                        <select
+                          className="select select-bordered w-full"
+                          name="category_id"
+                          value={formData.category_id}
+                          onChange={handleInputChange}
+                        >
                           <option value="" disabled selected>
                             Select a Category
                           </option>
                           {categories.map((category) => (
-                            <option value={data.category_id} key={category.category_id}>
+                            <option
+                              key={category.category_id}
+                            >
                               {category.category_name}
                             </option>
                           ))}
@@ -129,7 +136,8 @@ const Task = () => {
                           type="text"
                           placeholder="Type here"
                           name="summary"
-                          value={data.summary}
+                          value={formData.summary}
+                          onChange={handleInputChange}
                           className="input input-bordered w-full"
                         />
                       </div>
@@ -143,7 +151,8 @@ const Task = () => {
                         className="textarea textarea-bordered w-full"
                         placeholder="Describe the task"
                         name="description"
-                        value={data.description}
+                        value={formData.description}
+                        onChange={handleInputChange}
                       ></textarea>
                     </div>
 
@@ -151,12 +160,17 @@ const Task = () => {
                       <label className="label">
                         <span className="label-text">State of Task</span>
                       </label>
-                      <select className="select select-bordered w-full"  name="state_id">
+                      <select
+                        className="select select-bordered w-full"
+                        name="state_id"
+                        value={formData.state_id}
+                        onChange={handleInputChange}
+                      >
                         <option value="" disabled selected>
                           Select Task State
                         </option>
                         {states.map((state) => (
-                          <option key={state.state_id} value={data.state_id}>
+                          <option key={state.state_id}>
                             {state.state_name}
                           </option>
                         ))}
@@ -164,6 +178,7 @@ const Task = () => {
                     </div>
 
                     {/* Additional content and actions for Add to List */}
+                    <button type="submit">Submit</button>
                   </div>
                 </div>
               </div>
