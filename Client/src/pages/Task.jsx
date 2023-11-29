@@ -112,7 +112,7 @@ const Task = () => {
                           value={formData.category_name}
                           onChange={handleInputChange}
                         >
-                          <option value="" disabled selected>
+                          <option value="" disabled>
                             Select a Category
                           </option>
                           {categories.map((category) => (
@@ -167,7 +167,7 @@ const Task = () => {
                         value={formData.state_id}
                         onChange={handleInputChange}
                       >
-                        <option value="" disabled selected>
+                        <option value="" disabled>
                           Select Task State
                         </option>
                         {states.map((state) => (
@@ -177,9 +177,14 @@ const Task = () => {
                         ))}
                       </select>
                     </div>
-
-                    {/* Additional content and actions for Add to List */}
-                    <button type="submit">Submit</button>
+                    <div className="flex justify-center">
+                      <button
+                        type="submit"
+                        className="btn btn-active btn-wide btn-primary"
+                      >
+                        Submit
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
