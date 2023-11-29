@@ -16,7 +16,7 @@ const taskModel = {
 
     connection.query(
       "INSERT INTO task_list (category_id, state_id, summary, description) VALUES (?, ?, ?, ?)",
-      [category_id, state_id, summary, description],
+      [category_id, state_id, summary, description], // The array prevents SQL injection
       (error, results) => {
         if (error) {
           console.error(error);
