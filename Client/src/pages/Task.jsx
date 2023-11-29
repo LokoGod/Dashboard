@@ -63,6 +63,19 @@ const Task = () => {
     fetchTask();
   }, [categories]);
 
+  const getBadgeColorClass = (state_id) => {
+    switch (state_id) {
+      case 1:
+        return 'badge-accent';
+      case 2:
+        return 'badge-secondary';
+      case 3:
+        return 'badge-primary';
+      default:
+        return ''; // Default class if state_id doesn't match any case
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <main className="w-full overflow-x-hidden overflow-y-auto bg-base-300 p-5">
@@ -97,7 +110,7 @@ const Task = () => {
                   <button className="btn btn-ghost">Ignore</button>
                 </div>
                 <div className="card-actions justify-end mt-2">
-                  <div className="badge badge-accent">{task.category_name}</div>
+                  <div className={`badge ${getBadgeColorClass(task.state_id)}`}>{task.category_name}</div>
                 </div>
               </div>
             </div>
