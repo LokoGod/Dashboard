@@ -39,7 +39,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl" href="/">Dashboard</a>
+        <a className="btn btn-ghost text-xl" href="/">To-Do App</a>
       </div>
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">

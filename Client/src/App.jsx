@@ -18,8 +18,8 @@ function App() {
         <div className="flex-1 flex flex-col overflow-hidden">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/task" element={<Task />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Task />} />
           </Routes>
         </div>
       </BrowserRouter>
