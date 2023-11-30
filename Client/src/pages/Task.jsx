@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Toaster, toast } from 'sonner'
 
 const apiEndpoint = "http://localhost:5000/api/v1/";
 
@@ -21,6 +22,7 @@ const Task = () => {
     try {
       const response = await axios.post(`${apiEndpoint}task`, formData);
       console.log("POST request successful:", response);
+      window.location.reload()
     } catch (error) {
       console.error("POST request failed", error);
     }
@@ -37,12 +39,14 @@ const Task = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`${apiEndpoint}task/${id}`)
-      console.log("success", response);
+      await axios.delete(`${apiEndpoint}task/${id}`);
+      setTasks((prevTasks) => prevTasks.filter(task => task.task_id !== id));
+      console.log("Task deleted successfully");
     } catch (error) {
-      console.error(error);
+      console.error("Error deleting task", error);
     }
   }
+  
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -217,6 +221,7 @@ const Task = () => {
                       <button
                         type="submit"
                         className="btn btn-active btn-wide btn-primary"
+                        onClick={() => toast.success("Task has been created")}
                       >
                         Submit
                       </button>

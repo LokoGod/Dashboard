@@ -2,6 +2,9 @@
 import Navbar from "./components/basic_ui/Navbar";
 import Sidebar from "./components/basic_ui/Sidebar";
 
+// Import dependencies
+import { Toaster, toast } from 'sonner'
+
 // Import Routing
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Task from "./pages/Task";
@@ -11,6 +14,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <Toaster />
         <div className="flex-1 flex flex-col overflow-hidden">
           <Navbar />
           <Routes>
