@@ -35,6 +35,15 @@ const Task = () => {
     setActiveTab(tabNumber);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(`${apiEndpoint}task/${id}`)
+      console.log("success", response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await axios.get(`${apiEndpoint}categories/`);
@@ -107,7 +116,7 @@ const Task = () => {
                 <p>{task.description}</p>
                 <div className="card-actions justify-end">
                   <button className="btn btn-primary">Finish</button>
-                  <button className="btn btn-ghost">Ignore</button>
+                  <button className="btn btn-ghost" onClick={() => handleDelete(task.task_id)}>Ignore</button>
                 </div>
                 <div className="card-actions justify-end mt-2">
                   <div className={`badge ${getBadgeColorClass(task.state_id)}`}>{task.category_name}</div>
