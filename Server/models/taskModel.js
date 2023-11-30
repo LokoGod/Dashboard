@@ -11,7 +11,7 @@ const taskModel = {
     const { category_id, state_id, summary, description } = taskData;
     connection.query(
       "INSERT INTO task_list (category_id, state_id, summary, description, completed) VALUES (?, ?, ?, ?, false)",
-      [category_id, state_id, summary, description],
+      [category_id, state_id, summary, description], //Prevents SQL injections
       (error, results) => {
         callback(error, results);
       }
