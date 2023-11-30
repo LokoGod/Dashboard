@@ -145,7 +145,7 @@ const Task = () => {
                         <select
                           className="select select-bordered w-full"
                           name="category_id"
-                          value={formData.category_name}
+                          value={formData.category_id}
                           onChange={handleInputChange}
                         >
                           <option value="" disabled>
