@@ -12,13 +12,13 @@ import taskRouter from "./routes/taskRoute.js";
 const app = express();
 
 // Middlware
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(cors());
 
 // API Routing
-app.use("/api/v1/categories", categoryRouter)
-app.use("/api/v1/state", stateRouter)
-app.use("/api/v1/task", taskRouter)
+app.use("/api/v1/categories", categoryRouter);
+app.use("/api/v1/state", stateRouter);
+app.use("/api/v1/task", taskRouter);
 
 const port = process.env.PORT || 9000;
 

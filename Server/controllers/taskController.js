@@ -49,7 +49,8 @@ const taskController = {
   getUniqueTask: (req, res) => {
     const taskId = req.params.id;
 
-    taskModel.getUniqueTask(taskId, (err, results) => { // Corrected function name
+    taskModel.getUniqueTask(taskId, (err, results) => {
+      // Corrected function name
       if (err) {
         res.status(500).json({
           success: false,
@@ -64,7 +65,8 @@ const taskController = {
   deleteTask: (req, res) => {
     const taskId = req.params.id; // Extract taskId from params
 
-    taskModel.deleteTask(taskId, (err, results) => { // Corrected function parameters
+    taskModel.deleteTask(taskId, (err, results) => {
+      // Corrected function parameters
       if (err) {
         res.status(500).json({
           success: false,
