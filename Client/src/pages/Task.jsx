@@ -15,9 +15,8 @@ const Task = () => {
     summary: "",
     description: "",
   });
-  const [completed, setCompleted] = useState({
-    completed: "",
-  });
+  const [pendingTasks, setPendingTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,6 +25,7 @@ const Task = () => {
       const response = await axios.post(`${apiEndpoint}task`, formData);
       console.log("POST request successful:", response);
       window.location.reload();
+      toast.success('Task has been created successfully')
     } catch (error) {
       console.error("POST request failed", error);
     }
@@ -57,15 +57,15 @@ const Task = () => {
       const response = await axios.patch(`${apiEndpoint}task/${id}`, {
         completed: true,
       });
-      console.log("Server response:", response);
-      const updatedTasks = tasks.map((task) => {
-        if (task.task_id === id) {
-          return { ...task, completed: true };
-        }
-        return task;
-      });
-      setTasks(updatedTasks);
+
+      const updatedPendingTasks = pendingTasks.filter((task) => task.task_id !== id);
+      const updatedCompletedTasks = [...completedTasks, ...pendingTasks.filter((task) => task.task_id === id)];
+
+      setPendingTasks(updatedPendingTasks);
+      setCompletedTasks(updatedCompletedTasks);
+
       console.log("Task marked as completed successfully");
+      toast.success('Task has been completed successfully')
     } catch (error) {
       console.error("Failed to mark task as completed", error);
     }
@@ -91,6 +91,7 @@ const Task = () => {
   useEffect(() => {
     const fetchTask = async () => {
       const response = await axios.get(`${apiEndpoint}task/`);
+      
       const updatedTasks = response.data.map((task) => {
         const category = categories.find(
           (cat) => cat.category_id === task.category_id
@@ -100,10 +101,18 @@ const Task = () => {
           category_name: category ? category.category_name : "",
         };
       });
-      setTasks(updatedTasks);
+  
+      const updatedPendingTasks = updatedTasks.filter(task => !task.completed);
+      const updatedCompletedTasks = updatedTasks.filter(task => task.completed);
+      
+      setPendingTasks(updatedPendingTasks);
+      setCompletedTasks(updatedCompletedTasks);
     };
+  
     fetchTask();
   }, [categories]);
+  
+  
 
   const getBadgeColorClass = (state_id) => {
     switch (state_id) {
@@ -144,7 +153,7 @@ const Task = () => {
           <div>
             <h1 className="text-center">Pending Tasks</h1>
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {tasks.map((task) => (
+              {pendingTasks.map((task) => (
                 <div className="card bg-neutral text-neutral-content">
                   <div className="card-body items-center text-center">
                     <h2 className="card-title">{task.summary}</h2>
@@ -152,7 +161,7 @@ const Task = () => {
                     <div className="card-actions justify-end">
                       <button
                         className="btn btn-primary"
-                        onClick={() => handleCompleted(task.completed)}
+                        onClick={() => handleCompleted(task.task_id)}
                       >
                         Finish
                       </button>
@@ -179,7 +188,7 @@ const Task = () => {
 
             <h1 className="text-center mt-5">Completed tasks</h1>
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {tasks.map((task) => (
+              {completedTasks.map((task) => (
                 <div className="card bg-neutral text-neutral-content">
                   <div className="card-body items-center text-center">
                     <h2 className="card-title">{task.summary}</h2>

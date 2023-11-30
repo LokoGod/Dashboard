@@ -10,7 +10,7 @@ const taskModel = {
   createTask: (taskData, callback) => {
     const { category_id, state_id, summary, description } = taskData;
     connection.query(
-      "INSERT INTO task_list (category_id, state_id, summary, description, completed) VALUES (?, ?, ?, ?, true)",
+      "INSERT INTO task_list (category_id, state_id, summary, description, completed) VALUES (?, ?, ?, ?, false)",
       [category_id, state_id, summary, description],
       (error, results) => {
         callback(error, results);
