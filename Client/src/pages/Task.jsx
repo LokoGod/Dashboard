@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Toaster, toast } from 'sonner'
+import { Toaster, toast } from "sonner";
 
 const apiEndpoint = "http://localhost:5000/api/v1/";
 
@@ -22,7 +22,7 @@ const Task = () => {
     try {
       const response = await axios.post(`${apiEndpoint}task`, formData);
       console.log("POST request successful:", response);
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       console.error("POST request failed", error);
     }
@@ -40,14 +40,13 @@ const Task = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${apiEndpoint}task/${id}`);
-      setTasks((prevTasks) => prevTasks.filter(task => task.task_id !== id));
+      setTasks((prevTasks) => prevTasks.filter((task) => task.task_id !== id));
       console.log("Task deleted successfully");
-      toast.info('Event has been deleted')
+      toast.info("Event has been deleted");
     } catch (error) {
       console.error("Error deleting task", error);
     }
-  }
-  
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -69,8 +68,13 @@ const Task = () => {
     const fetchTask = async () => {
       const response = await axios.get(`${apiEndpoint}task/`);
       const updatedTasks = response.data.map((task) => {
-        const category = categories.find((cat) => cat.category_id === task.category_id);
-        return { ...task, category_name: category ? category.category_name : "" };
+        const category = categories.find(
+          (cat) => cat.category_id === task.category_id
+        );
+        return {
+          ...task,
+          category_name: category ? category.category_name : "",
+        };
       });
       setTasks(updatedTasks);
     };
@@ -80,13 +84,13 @@ const Task = () => {
   const getBadgeColorClass = (state_id) => {
     switch (state_id) {
       case 1:
-        return 'badge-accent';
+        return "badge-accent";
       case 2:
-        return 'badge-secondary';
+        return "badge-secondary";
       case 3:
-        return 'badge-primary';
+        return "badge-primary";
       default:
-        return ''; // Default class if state_id doesn't match any case
+        return ""; // Default class if state_id doesn't match any case
     }
   };
 
@@ -113,24 +117,64 @@ const Task = () => {
         </div>
 
         {activeTab === 1 && (
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {tasks.map((task) => (    
-            <div className="card bg-neutral text-neutral-content">
-              <div className="card-body items-center text-center">
-                <h2 className="card-title">{task.summary}</h2>
-                <p>{task.description}</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Finish</button>
-                  <button className="btn btn-ghost" onClick={() => handleDelete(task.task_id)}>Ignore</button>
+          <div>
+            <h1 className="text-center">Pending Tasks</h1>
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {tasks.map((task) => (
+                <div className="card bg-neutral text-neutral-content">
+                  <div className="card-body items-center text-center">
+                    <h2 className="card-title">{task.summary}</h2>
+                    <p>{task.description}</p>
+                    <div className="card-actions justify-end">
+                      <button className="btn btn-primary">Finish</button>
+                      <button
+                        className="btn btn-ghost"
+                        onClick={() => handleDelete(task.task_id)}
+                      >
+                        Ignore
+                      </button>
+                    </div>
+                    <div className="card-actions justify-end mt-2">
+                      <div
+                        className={`badge ${getBadgeColorClass(task.state_id)}`}
+                      >
+                        {task.category_name}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="card-actions justify-end mt-2">
-                  <div className={`badge ${getBadgeColorClass(task.state_id)}`}>{task.category_name}</div>
-                </div>
-              </div>
-            </div>
-            ))}
+              ))}
 
-            {/* Add more cards as needed */}
+              {/* Add more cards as needed */}
+            </div>
+
+            <h1 className="text-center mt-5">Completed tasks</h1>
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {tasks.map((task) => (
+                <div className="card bg-neutral text-neutral-content">
+                  <div className="card-body items-center text-center">
+                    <h2 className="card-title">{task.summary}</h2>
+                    <p>{task.description}</p>
+                    <div className="card-actions justify-end">
+                      <button className="btn btn-primary">Finish</button>
+                      <button
+                        className="btn btn-ghost"
+                        onClick={() => handleDelete(task.task_id)}
+                      >
+                        Ignore
+                      </button>
+                    </div>
+                    <div className="card-actions justify-end mt-2">
+                      <div
+                        className={`badge ${getBadgeColorClass(task.state_id)}`}
+                      >
+                        {task.category_name}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
