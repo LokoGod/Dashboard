@@ -1,7 +1,7 @@
 import connection from "../database/DBconfig.js";
 
 const taskModel = {
-  getTasks: (callback) => {
+  getTask: (callback) => {
     connection.query("SELECT * FROM task_list", (error, results) => {
       if (error) {
         console.error(error);
@@ -27,7 +27,7 @@ const taskModel = {
       }
     );
   },
-  getTask: (callback) => {
+  getUniqueTask: (callback) => {
     connection.query('SELECT * FROM task_list WHERE task_id = ?', (error, results) => {
       if (error) {
         console.error(error);

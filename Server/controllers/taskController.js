@@ -1,7 +1,7 @@
 import taskModel from "../models/taskModel.js";
 
 const taskController = {
-  getTasks: (req, res) => {
+  getTask: (req, res) => {
     taskModel.getTask((err, results) => {
       if (err) {
         res.status(500).send("Internal Server Error");
@@ -41,7 +41,7 @@ const taskController = {
       });
     }
   },
-  getTask: (req, res) => {
+  getUniqueTask: (req, res) => {
     taskModel.getTask((err, results) => {
       if (err) {
         res.status(500).send("Internal server error");
