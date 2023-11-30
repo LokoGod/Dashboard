@@ -1,7 +1,7 @@
 import taskModel from "../models/taskModel.js";
 
 const taskController = {
-  getTask: (req, res) => {
+  getTasks: (req, res) => {
     taskModel.getTask((err, results) => {
       if (err) {
         res.status(500).send("Internal Server Error");
