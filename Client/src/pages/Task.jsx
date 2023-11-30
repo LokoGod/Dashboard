@@ -53,21 +53,24 @@ const Task = () => {
 
   const handleCompleted = async (id) => {
     try {
+      console.log("Marking task as completed:", id);
       const response = await axios.patch(`${apiEndpoint}task/${id}`, {
         completed: true,
       });
+      console.log("Server response:", response);
       const updatedTasks = tasks.map((task) => {
         if (task.task_id === id) {
           return { ...task, completed: true };
         }
         return task;
       });
-      setTasks(updatedTasks)
+      setTasks(updatedTasks);
       console.log("Task marked as completed successfully");
     } catch (error) {
-      console.error("failed", error);
+      console.error("Failed to mark task as completed", error);
     }
   };
+  
 
   useEffect(() => {
     const fetchCategories = async () => {
