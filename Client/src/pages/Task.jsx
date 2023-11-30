@@ -42,6 +42,7 @@ const Task = () => {
       await axios.delete(`${apiEndpoint}task/${id}`);
       setTasks((prevTasks) => prevTasks.filter(task => task.task_id !== id));
       console.log("Task deleted successfully");
+      toast.success('Event has been deleted')
     } catch (error) {
       console.error("Error deleting task", error);
     }
@@ -120,7 +121,7 @@ const Task = () => {
                 <p>{task.description}</p>
                 <div className="card-actions justify-end">
                   <button className="btn btn-primary">Finish</button>
-                  <button className="btn btn-ghost" onClick={() => handleDelete(task.task_id).toast.error('Task has been deleted')}>Ignore</button>
+                  <button className="btn btn-ghost" onClick={() => handleDelete(task.task_id)}>Ignore</button>
                 </div>
                 <div className="card-actions justify-end mt-2">
                   <div className={`badge ${getBadgeColorClass(task.state_id)}`}>{task.category_name}</div>
