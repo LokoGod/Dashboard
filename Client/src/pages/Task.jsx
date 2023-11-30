@@ -42,7 +42,7 @@ const Task = () => {
       await axios.delete(`${apiEndpoint}task/${id}`);
       setTasks((prevTasks) => prevTasks.filter(task => task.task_id !== id));
       console.log("Task deleted successfully");
-      toast.success('Event has been deleted')
+      toast.info('Event has been deleted')
     } catch (error) {
       console.error("Error deleting task", error);
     }
