@@ -25,7 +25,7 @@ const Task = () => {
       const response = await axios.post(`${apiEndpoint}task`, formData);
       console.log("POST request successful:", response);
       window.location.reload();
-      toast.success('Task has been created successfully')
+      toast.success("Task has been created successfully");
     } catch (error) {
       console.error("POST request failed", error);
     }
@@ -43,9 +43,19 @@ const Task = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${apiEndpoint}task/${id}`);
-      setTasks((prevTasks) => prevTasks.filter((task) => task.task_id !== id));
+
+      const updatedPendingTasks = pendingTasks.filter(
+        (task) => task.task_id !== id
+      );
+      const updatedCompletedTasks = completedTasks.filter(
+        (task) => task.task_id !== id
+      );
+
+      setPendingTasks(updatedPendingTasks);
+      setCompletedTasks(updatedCompletedTasks);
+
       console.log("Task deleted successfully");
-      toast.info("Event has been deleted");
+      toast.info("Task has been deleted");
     } catch (error) {
       console.error("Error deleting task", error);
     }
@@ -58,19 +68,23 @@ const Task = () => {
         completed: true,
       });
 
-      const updatedPendingTasks = pendingTasks.filter((task) => task.task_id !== id);
-      const updatedCompletedTasks = [...completedTasks, ...pendingTasks.filter((task) => task.task_id === id)];
+      const updatedPendingTasks = pendingTasks.filter(
+        (task) => task.task_id !== id
+      );
+      const updatedCompletedTasks = [
+        ...completedTasks,
+        ...pendingTasks.filter((task) => task.task_id === id),
+      ];
 
       setPendingTasks(updatedPendingTasks);
       setCompletedTasks(updatedCompletedTasks);
 
       console.log("Task marked as completed successfully");
-      toast.success('Task has been completed successfully')
+      toast.success("Task has been completed successfully");
     } catch (error) {
       console.error("Failed to mark task as completed", error);
     }
   };
-  
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -91,7 +105,7 @@ const Task = () => {
   useEffect(() => {
     const fetchTask = async () => {
       const response = await axios.get(`${apiEndpoint}task/`);
-      
+
       const updatedTasks = response.data.map((task) => {
         const category = categories.find(
           (cat) => cat.category_id === task.category_id
@@ -101,18 +115,20 @@ const Task = () => {
           category_name: category ? category.category_name : "",
         };
       });
-  
-      const updatedPendingTasks = updatedTasks.filter(task => !task.completed);
-      const updatedCompletedTasks = updatedTasks.filter(task => task.completed);
-      
+
+      const updatedPendingTasks = updatedTasks.filter(
+        (task) => !task.completed
+      );
+      const updatedCompletedTasks = updatedTasks.filter(
+        (task) => task.completed
+      );
+
       setPendingTasks(updatedPendingTasks);
       setCompletedTasks(updatedCompletedTasks);
     };
-  
+
     fetchTask();
   }, [categories]);
-  
-  
 
   const getBadgeColorClass = (state_id) => {
     switch (state_id) {
@@ -194,7 +210,10 @@ const Task = () => {
                     <h2 className="card-title">{task.summary}</h2>
                     <p>{task.description}</p>
                     <div className="card-actions justify-end">
-                      <button className="btn btn-primary" onClick={() => handleCompleted(task.completed)}>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => handleCompleted(task.completed)}
+                      >
                         Finish
                       </button>
                       <button
@@ -306,7 +325,6 @@ const Task = () => {
                       <button
                         type="submit"
                         className="btn btn-active btn-wide btn-primary"
-                        onClick={() => toast.success("Task has been created")}
                       >
                         Submit
                       </button>
