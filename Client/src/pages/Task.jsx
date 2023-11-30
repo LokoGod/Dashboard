@@ -15,6 +15,9 @@ const Task = () => {
     summary: "",
     description: "",
   });
+  const [completed, setCompleted] = useState({
+    completed: "",
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,6 +48,15 @@ const Task = () => {
       toast.info("Event has been deleted");
     } catch (error) {
       console.error("Error deleting task", error);
+    }
+  };
+
+  const handleCompleted = async (id) => {
+    try {
+      const response = await axios.post(`${apiEndpoint}task/${id}`, completed);
+      console.log("COMPLETED MARKED", response);
+    } catch (error) {
+      console.error("failed", error);
     }
   };
 
@@ -126,7 +138,10 @@ const Task = () => {
                     <h2 className="card-title">{task.summary}</h2>
                     <p>{task.description}</p>
                     <div className="card-actions justify-end">
-                      <button className="btn btn-primary">Finish</button>
+                      <button className="btn btn-primary" 
+                      onClick={() => handleCompleted(task.completed)}>
+                        Finish
+                      </button>
                       <button
                         className="btn btn-ghost"
                         onClick={() => handleDelete(task.task_id)}
@@ -156,7 +171,9 @@ const Task = () => {
                     <h2 className="card-title">{task.summary}</h2>
                     <p>{task.description}</p>
                     <div className="card-actions justify-end">
-                      <button className="btn btn-primary">Finish</button>
+                      <button className="btn btn-primary" onClick={""}>
+                        Finish
+                      </button>
                       <button
                         className="btn btn-ghost"
                         onClick={() => handleDelete(task.task_id)}
