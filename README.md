@@ -23,3 +23,22 @@ cd To-Do-App
 
 # Install dependencies
 npm install
+
+## Usage
+
+1. Run the application using `npm start`.
+2. Open your browser and go to [http://localhost:3000](http://localhost:3000).
+
+## Contributing
+
+Contributions are welcome! Please follow our [contribution guidelines](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Special thanks to contributors who have made this project possible.
+
+Feel free to [open an issue](https://github.com/your-username/your-repo/issues) or submit a [pull request](https://github.com/your-username/your-repo/pulls) to improve this project.
