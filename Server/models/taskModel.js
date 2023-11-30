@@ -28,6 +28,16 @@ const taskModel = {
     );
   },
 
+  completedTask: (taskId, completed, callback) => {
+    connection.query(
+      "UPDATE task_list SET completed = ? WHERE task_id = ?",
+      [completed, taskId],
+      (error, results) => {
+        callback(error, results);
+      }
+    );
+  },
+
   deleteTask: (taskId, callback) => {
     connection.query(
       "DELETE FROM task_list WHERE task_id = ?",
