@@ -16,10 +16,10 @@ const taskController = {
 
   createTask: (req, res) => {
     try {
-      const { category_id, state_id, summary, description } = req.body;
+      const { category_id, state_id, summary, description, completed } = req.body;
 
       taskModel.createTask(
-        { category_id, state_id, summary, description },
+        { category_id, state_id, summary, description, completed },
         (err, results) => {
           if (err) {
             console.error("Error creating task:", err);
@@ -32,7 +32,7 @@ const taskController = {
             res.status(201).json({
               success: true,
               message: "Task created successfully",
-              data: { id: taskId, category_id, state_id, summary, description },
+              data: { id: taskId, category_id, state_id, summary, description, completed },
             });
           }
         }

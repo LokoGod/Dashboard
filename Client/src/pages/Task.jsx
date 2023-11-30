@@ -53,8 +53,17 @@ const Task = () => {
 
   const handleCompleted = async (id) => {
     try {
-      const response = await axios.post(`${apiEndpoint}task/${id}`, completed);
-      console.log("COMPLETED MARKED", response);
+      const response = await axios.patch(`${apiEndpoint}task/${id}`, {
+        completed: true,
+      });
+      const updatedTasks = tasks.map((task) => {
+        if (task.task_id === id) {
+          return { ...task, completed: true };
+        }
+        return task;
+      });
+      setTasks(updatedTasks)
+      console.log("Task marked as completed successfully");
     } catch (error) {
       console.error("failed", error);
     }
@@ -138,8 +147,10 @@ const Task = () => {
                     <h2 className="card-title">{task.summary}</h2>
                     <p>{task.description}</p>
                     <div className="card-actions justify-end">
-                      <button className="btn btn-primary" 
-                      onClick={() => handleCompleted(task.completed)}>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => handleCompleted(task.completed)}
+                      >
                         Finish
                       </button>
                       <button
@@ -171,7 +182,7 @@ const Task = () => {
                     <h2 className="card-title">{task.summary}</h2>
                     <p>{task.description}</p>
                     <div className="card-actions justify-end">
-                      <button className="btn btn-primary" onClick={""}>
+                      <button className="btn btn-primary" onClick={() => handleCompleted(task.completed)}>
                         Finish
                       </button>
                       <button
