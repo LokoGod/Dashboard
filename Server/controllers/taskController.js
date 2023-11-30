@@ -41,6 +41,15 @@ const taskController = {
       });
     }
   },
+  getTask: (req, res) => {
+    taskModel.getTask((err, results) => {
+      if (err) {
+        res.status(500).send("Internal server error");
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  },
   deleteTask: (req, res) => {
     taskModel.deleteTask((err, results) => {
       if (err) {

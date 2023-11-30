@@ -28,7 +28,7 @@ const taskModel = {
     );
   },
   getTask: (callback) => {
-    connection.query("SELECT task_id FROM task_list", (error, results) => {
+    connection.query('SELECT * FROM task_list WHERE task_id = ?', (error, results) => {
       if (error) {
         console.error(error);
         callback(error, null);
