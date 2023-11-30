@@ -28,8 +28,18 @@ const taskModel = {
     );
   },
   deleteTask: (callback) => {
-    connection.query("DELETE FROM task_list WHERE category_id == ?")
-  }
+    connection.query(
+      'DELETE FROM task_list WHERE category_id = "?"',
+      (error, results) => {
+        if (error) {
+          console.error(error);
+          callback(error, null);
+        } else {
+          callback(null, results);
+        }
+      }
+    );
+  },
 };
 
 export default taskModel;
