@@ -120,7 +120,7 @@ const Task = () => {
                 <p>{task.description}</p>
                 <div className="card-actions justify-end">
                   <button className="btn btn-primary">Finish</button>
-                  <button className="btn btn-ghost" onClick={() => handleDelete(task.task_id)}>Ignore</button>
+                  <button className="btn btn-ghost" onClick={() => handleDelete(task.task_id).toast.error('Task has been deleted')}>Ignore</button>
                 </div>
                 <div className="card-actions justify-end mt-2">
                   <div className={`badge ${getBadgeColorClass(task.state_id)}`}>{task.category_name}</div>
