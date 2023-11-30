@@ -18,6 +18,17 @@ const taskModel = {
     );
   },
 
+  completeTask: (taskData, callback) => {
+    const { completed } = taskData;
+    connection.query(
+      "INSERT INTO task_list (completed) values (?)",
+      [completed],
+      (error, results) => {
+        callback(error, results);
+      }
+    );
+  },
+
   getUniqueTask: (taskId, callback) => {
     connection.query(
       "SELECT * FROM task_list WHERE task_id = ?",
