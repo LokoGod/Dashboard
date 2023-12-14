@@ -4,7 +4,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/LokoGod/To-Do-App)](https://github.com/LokoGod/To-Do-App/issues)
 [![GitHub stars](https://img.shields.io/github/stars/LokoGod/To-Do-App)](https://github.com/LokoGod/To-Do-App/stargazers)
 
-A simple and intuitive To-Do App built with [React.Js/daisyUI, Node/Express.Js, MySQL].
+A simple and intuitive To-Do App built with [React.Js/daisyUI, Node/Express.Js, MySQL.
 
 ## Features
 
